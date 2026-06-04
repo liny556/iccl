@@ -168,7 +168,7 @@ The script evaluates:
 
 Please consider citing our paper if you find this repo useful in your work 😀.
 
-``
+```text
 @misc{li2026understandinggeneralizationforgettingincontext,
       title={Understanding Generalization and Forgetting in In-Context Continual Learning}, 
       author={Guangyu Li and Meng Ding and Lijie Hu},
@@ -178,7 +178,7 @@ Please consider citing our paper if you find this repo useful in your work 😀.
       primaryClass={cs.LG},
       url={https://arxiv.org/abs/2605.28705}, 
 }
-``
+```
 
 ## Contact
 
