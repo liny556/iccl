@@ -1,7 +1,7 @@
 # Understanding Generalization and Forgetting in In-Context Continual Learning
 
 This repository contains the code used to reproduce the experiments for
-**Understanding Generalization and Forgetting in In-Context Continual Learning**.
+[**Understanding Generalization and Forgetting in In-Context Continual Learning**](https://arxiv.org/abs/2605.28705).
 The project studies how frozen attention-based models behave when a prompt
 contains a sequence of tasks, focusing on generalization, interference,
 negative transfer, and forgetting.
