@@ -163,18 +163,3 @@ The script evaluates:
 - Task A baseline: SST-2 examples followed by an SST-2 query.
 - Task A final: SST-2 examples, then AG News examples, then an SST-2 query.
 
-## GitHub Hygiene
-
-Before publishing, check that generated artifacts are ignored:
-
-```bash
-git status --short
-```
-
-The repository should not include checkpoints, result JSON files, plots, paper
-PDFs, zip files, or server-specific run directories.
-
-## License
-
-This repository keeps the original MIT license from the upstream synthetic ICL
-codebase.
