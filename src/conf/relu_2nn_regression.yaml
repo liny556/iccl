@@ -11,7 +11,7 @@ training:
             inc: 5
             interval: 2000
 
-out_dir: ../models/relu_2nn_regression
+out_dir: models/relu_2nn_regression
 
 wandb:
     name: "relu_2nn_regression_standard"

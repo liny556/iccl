@@ -11,7 +11,7 @@ training:
             inc: 5
             interval: 2000
 
-out_dir: ../models/decision_tree
+out_dir: models/decision_tree
 
 wandb:
     name: "decision_tree_standard"

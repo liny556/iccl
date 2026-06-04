@@ -1,8 +1,8 @@
-inherit: 
+inherit:
     - base.yaml
 
 training:
-    task: linear_regression
+    task: quadratic_regression
     curriculum:
         points:
             start: 11
@@ -10,7 +10,7 @@ training:
             inc: 2
             interval: 2000
 
-out_dir: models/linear_regression
+out_dir: models/quadratic_regression
 
 wandb:
-    name: "linear_regression_standard"
+    name: "quadratic_regression_standard"

@@ -11,7 +11,7 @@ training:
             inc: 2
             interval: 2000
 
-out_dir: ../models/sparse_linear_regression
+out_dir: models/sparse_linear_regression
 
 wandb:
     name: "sparse_regression_standard"

@@ -1,8 +1,8 @@
-inherit: 
+inherit:
     - base.yaml
 
 training:
-    task: linear_regression
+    task: linear_classification
     curriculum:
         points:
             start: 11
@@ -10,7 +10,7 @@ training:
             inc: 2
             interval: 2000
 
-out_dir: models/linear_regression
+out_dir: models/linear_classification
 
 wandb:
-    name: "linear_regression_standard"
+    name: "linear_classification_standard"
