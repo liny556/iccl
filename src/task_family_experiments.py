@@ -2,7 +2,7 @@
 Task-family experiments for in-context continual learning.
 
 This script extends Section 5-style experiments from linear regression
-to additional task families (e.g., sparse/quadratic/relu_2nn/classification).
+to the task families used in the public experiments.
 """
 import argparse
 import json
@@ -78,8 +78,9 @@ def main():
         required=True,
         help=(
             "Task-model pairs in task_name:model_path format. "
-            "Example: linear_regression:../models/linear_regression/pretrained "
-            "quadratic_regression:../models/quadratic_regression/pretrained"
+            "Example: linear_regression:models/linear_regression/pretrained "
+            "sparse_linear_regression:models/sparse_linear_regression/pretrained "
+            "relu_2nn_regression:models/relu_2nn_regression/pretrained"
         ),
     )
     parser.add_argument("--data_name", type=str, default="gaussian")

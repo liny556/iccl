@@ -24,13 +24,6 @@ relevant_model_names = {
         "Averaging",
         "Lasso (alpha=0.01)",
     ],
-    "decision_tree": [
-        "Transformer",
-        "3-Nearest Neighbors",
-        "2-layer NN, GD",
-        "Greedy Tree Learning",
-        "XGBoost",
-    ],
     "relu_2nn_regression": [
         "Transformer",
         "Least Squares",
@@ -92,14 +85,12 @@ def collect_results(run_dir, df, valid_row=None, rename_eval=None, rename_model=
                 n_dims = conf.model.n_dims
 
                 xlim = 2 * n_dims + 1
-                if r.task in ["relu_2nn_regression", "decision_tree"]:
+                if r.task == "relu_2nn_regression":
                     xlim = 200
 
                 normalization = n_dims
                 if r.task == "sparse_linear_regression":
                     normalization = int(r.kwargs.split("=")[-1])
-                if r.task == "decision_tree":
-                    normalization = 1
 
                 for k, v in m.items():
                     v = v[:xlim]

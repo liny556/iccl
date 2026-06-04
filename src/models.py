@@ -33,10 +33,6 @@ def get_relevant_baselines(task_name):
             (NNModel, {"n_neighbors": 3}),
             (AveragingModel, {}),
         ],
-        "linear_classification": [
-            (NNModel, {"n_neighbors": 3}),
-            (AveragingModel, {}),
-        ],
         "sparse_linear_regression": [
             (LeastSquaresModel, {}),
             (NNModel, {"n_neighbors": 3}),
@@ -62,14 +58,6 @@ def get_relevant_baselines(task_name):
                     "num_steps": 100,
                 },
             ),
-        ],
-        "decision_tree": [
-            (LeastSquaresModel, {}),
-            (NNModel, {"n_neighbors": 3}),
-            (DecisionTreeModel, {"max_depth": 4}),
-            (DecisionTreeModel, {"max_depth": None}),
-            (XGBoostModel, {}),
-            (AveragingModel, {}),
         ],
     }
 

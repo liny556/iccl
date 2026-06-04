@@ -26,11 +26,23 @@ def get_model_from_run(run_path, step=-1, only_conf=False):
     if step == -1:
         state_path = os.path.join(run_path, "state.pt")
         state = torch.load(state_path)
-        model.load_state_dict(state["model_state_dict"])
+        state_dict = state["model_state_dict"]
     else:
         model_path = os.path.join(run_path, f"model_{step}.pt")
         state_dict = torch.load(model_path)
-        model.load_state_dict(state_dict)
+
+    # Load state_dict with strict=False to handle version mismatches
+    # This allows ignoring unexpected keys (e.g., bias, masked_bias from newer transformers versions)
+    missing_keys, unexpected_keys = model.load_state_dict(state_dict, strict=False)
+
+    if missing_keys:
+        print(f"Warning: {len(missing_keys)} missing keys in state_dict (first 5: {missing_keys[:5]})")
+    if unexpected_keys:
+        # Filter out common expected mismatches (bias and masked_bias from transformers version differences)
+        unexpected_filtered = [k for k in unexpected_keys if "bias" not in k and "masked_bias" not in k]
+        if unexpected_filtered:
+            print(f"Warning: {len(unexpected_filtered)} unexpected keys (first 5: {unexpected_filtered[:5]})")
+        # Silently ignore bias/masked_bias keys as they're from transformers version differences
 
     return model, conf
 
@@ -344,10 +356,6 @@ def baseline_names(name):
         return f"Lasso (alpha={alpha})"
     if "gd" in name:
         return "2-layer NN, GD"
-    if "decision_tree" in name:
-        return "Greedy Tree Learning"
-    if "xgboost" in name:
-        return "XGBoost"
     return name
 
 

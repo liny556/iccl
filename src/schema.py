@@ -37,9 +37,7 @@ curriculum_schema = {
 TASK_LIST = [
     "linear_regression",
     "sparse_linear_regression",
-    "linear_classification",
     "relu_2nn_regression",
-    "decision_tree",
 ]
 
 training_schema = {

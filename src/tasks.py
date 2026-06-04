@@ -55,11 +55,7 @@ def get_task_sampler(
     task_names_to_classes = {
         "linear_regression": LinearRegression,
         "sparse_linear_regression": SparseLinearRegression,
-        "linear_classification": LinearClassification,
-        "noisy_linear_regression": NoisyLinearRegression,
-        "quadratic_regression": QuadraticRegression,
         "relu_2nn_regression": Relu2nnRegression,
-        "decision_tree": DecisionTree,
     }
     if task_name in task_names_to_classes:
         task_cls = task_names_to_classes[task_name]
