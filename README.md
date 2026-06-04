@@ -2,7 +2,8 @@
 
 This repository contains the code used to reproduce the experiments for
 [**Understanding Generalization and Forgetting in In-Context Continual Learning**](https://arxiv.org/abs/2605.28705).
-The project studies how frozen attention-based models behave when a prompt
+
+The paper studies how frozen attention-based models behave when a prompt
 contains a sequence of tasks, focusing on generalization, interference,
 negative transfer, and forgetting.
 
@@ -163,3 +164,22 @@ The script evaluates:
 - Task A baseline: SST-2 examples followed by an SST-2 query.
 - Task A final: SST-2 examples, then AG News examples, then an SST-2 query.
 
+## Citation
+
+Please consider citing our paper if you find this repo useful in your work 😀.
+
+``
+@misc{li2026understandinggeneralizationforgettingincontext,
+      title={Understanding Generalization and Forgetting in In-Context Continual Learning}, 
+      author={Guangyu Li and Meng Ding and Lijie Hu},
+      year={2026},
+      eprint={2605.28705},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2605.28705}, 
+}
+``
+
+## Contact
+
+If you have any questions, please feel free to open an issue or contact me via email at flipped@mail.ustc.edu.cn.
