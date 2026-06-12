@@ -81,20 +81,22 @@ available through one entry point:
 ```bash
 python src/multi_task_experiments.py \
   --model_path models/linear_regression/pretrained \
-  --experiment 6.2 \
+  --experiment context-length \
   --output_dir results \
   --num_eval_batches 100 \
   --batch_size 32
 ```
 
-Valid experiment names are `6.1`, `6.2`, `6.2fw`, `6.3`, `6.4`, `6.5`, and
-`all`. The `6.2fw` option runs the fixed-weight context-length experiment used
-for the theory comparison:
+Valid experiment names are `training-sample-size`, `context-length`,
+`fixed-weight-context-length`, `task-similarity`, `task-order`, `num-tasks`, and
+`all`. Deprecated aliases `6.1`, `6.2`, `6.2fw`, `6.3`, `6.4`, and `6.5` are
+still accepted with a warning. The `fixed-weight-context-length` option runs the
+fixed-weight context-length experiment used for the theory comparison:
 
 ```bash
 python src/multi_task_experiments.py \
   --model_path models/linear_regression/pretrained \
-  --experiment 6.2fw \
+  --experiment fixed-weight-context-length \
   --output_dir results \
   --fixed_w_seed 42
 ```
@@ -115,15 +117,15 @@ python src/task_family_experiments.py \
 Plot a synthetic experiment JSON file:
 
 ```bash
-python src/plot_paper_results.py results/exp_6_2_context_length.json
+python src/plot_paper_results.py results/context_length_sweep.json
 ```
 
 Choose an explicit output path if needed:
 
 ```bash
 python src/plot_paper_results.py \
-  results/exp_6_3_task_similarity.json \
-  --output results/exp_6_3_task_similarity_plot.pdf
+  results/task_similarity_sweep.json \
+  --output results/task_similarity_sweep_plot.pdf
 ```
 
 Generated figures are ignored by git.

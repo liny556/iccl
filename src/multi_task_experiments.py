@@ -17,7 +17,7 @@ from samplers import get_data_sampler
 from theorem_4_3 import tensor_weights_to_numpy_list, theorem_4_3_decomposition
 
 
-def experiment_6_1_training_sample_size(
+def run_training_sample_size_sweep(
     model_path: str,
     n_dims: Optional[int] = None,
     n_tasks: int = 5,
@@ -70,7 +70,7 @@ def experiment_6_1_training_sample_size(
     
     # Save results
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "exp_6_1_training_sample_size.json")
+    output_path = os.path.join(output_dir, "training_sample_size_sweep.json")
     with open(output_path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nResults saved to {output_path}")
@@ -78,7 +78,7 @@ def experiment_6_1_training_sample_size(
     return results
 
 
-def experiment_6_2_context_length(
+def run_context_length_sweep(
     model_path: str,
     n_dims: Optional[int] = None,
     n_tasks: int = 5,
@@ -177,7 +177,7 @@ def experiment_6_2_context_length(
     
     # Save results
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "exp_6_2_context_length.json")
+    output_path = os.path.join(output_dir, "context_length_sweep.json")
     with open(output_path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nResults saved to {output_path}")
@@ -255,7 +255,7 @@ def _fixed_task_weights_independent(
     return out
 
 
-def experiment_6_2_context_length_fixed_w(
+def run_fixed_weight_context_length_sweep(
     model_path: str,
     n_dims: Optional[int] = None,
     n_tasks: int = 5,
@@ -343,7 +343,7 @@ def experiment_6_2_context_length_fixed_w(
     print()
 
     meta_dict: Dict = {
-            "experiment": "6.2_context_length_fixed_w",
+            "experiment": "fixed_weight_context_length_sweep",
             "fixed_w_seed": fixed_w_seed,
             "w_scale": w_scale,
             "n_tasks": n_tasks,
@@ -396,7 +396,7 @@ def experiment_6_2_context_length_fixed_w(
         print(f"  Overall MSE: {metrics['overall_mse']:.4f} +/- {metrics['overall_mse_std']:.4f}")
 
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "exp_6_2_context_length_fixed_w.json")
+    output_path = os.path.join(output_dir, "fixed_weight_context_length_sweep.json")
     with open(output_path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nResults saved to {output_path}")
@@ -545,7 +545,7 @@ def experiment_6_2_context_length_same_w_task0_task2(
     
     # Save results
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "exp_6_2_context_length_same_w_task0_task2.json")
+    output_path = os.path.join(output_dir, "context_length_same_weight_task0_task2.json")
     with open(output_path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nResults saved to {output_path}")
@@ -787,7 +787,7 @@ def experiment_4_2_variation_1_context_length_forgetting_same_w(
     return results
 
 
-def experiment_6_3_task_similarity(
+def run_task_similarity_sweep(
     model_path: str,
     n_dims: Optional[int] = None,
     n_tasks: int = 5,
@@ -891,7 +891,7 @@ def experiment_6_3_task_similarity(
     
     # Save results
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "exp_6_3_task_similarity.json")
+    output_path = os.path.join(output_dir, "task_similarity_sweep.json")
     with open(output_path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nResults saved to {output_path}")
@@ -899,7 +899,7 @@ def experiment_6_3_task_similarity(
     return results
 
 
-def experiment_6_4_task_order(
+def run_task_order_analysis(
     model_path: str,
     n_dims: Optional[int] = None,
     n_tasks: int = 5,
@@ -992,7 +992,7 @@ def experiment_6_4_task_order(
     
     # Save results
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "exp_6_4_task_order.json")
+    output_path = os.path.join(output_dir, "task_order_analysis.json")
     with open(output_path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nResults saved to {output_path}")
@@ -1000,7 +1000,7 @@ def experiment_6_4_task_order(
     return results
 
 
-def experiment_6_5_number_of_tasks(
+def run_number_of_tasks_sweep(
     model_path: str,
     n_dims: Optional[int] = None,
     n_context: Optional[int] = None,
@@ -1121,7 +1121,7 @@ def experiment_6_5_number_of_tasks(
     
     # Save results
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "exp_6_5_number_of_tasks.json")
+    output_path = os.path.join(output_dir, "number_of_tasks_sweep.json")
     with open(output_path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nResults saved to {output_path}")
@@ -1148,26 +1148,111 @@ def experiment_6_5_number_of_tasks(
     return results
 
 
+DEPRECATED_EXPERIMENT_ALIASES = {
+    "6.1": "training-sample-size",
+    "6.2": "context-length",
+    "6.2fw": "fixed-weight-context-length",
+    "6.3": "task-similarity",
+    "6.4": "task-order",
+    "6.5": "num-tasks",
+}
+
+EXPERIMENT_CHOICES = [
+    "training-sample-size",
+    "context-length",
+    "fixed-weight-context-length",
+    "task-similarity",
+    "task-order",
+    "num-tasks",
+    "all",
+    *DEPRECATED_EXPERIMENT_ALIASES.keys(),
+]
+
+
+def _canonical_experiment_name(experiment: str) -> str:
+    if experiment in DEPRECATED_EXPERIMENT_ALIASES:
+        canonical = DEPRECATED_EXPERIMENT_ALIASES[experiment]
+        print(
+            f"Warning: --experiment {experiment!r} is deprecated; "
+            f"use {canonical!r} instead."
+        )
+        return canonical
+    return experiment
+
+
+def experiment_6_1_training_sample_size(*args, **kwargs):
+    print(
+        "Warning: experiment_6_1_training_sample_size() is deprecated; "
+        "use run_training_sample_size_sweep() instead."
+    )
+    return run_training_sample_size_sweep(*args, **kwargs)
+
+
+def experiment_6_2_context_length(*args, **kwargs):
+    print(
+        "Warning: experiment_6_2_context_length() is deprecated; "
+        "use run_context_length_sweep() instead."
+    )
+    return run_context_length_sweep(*args, **kwargs)
+
+
+def experiment_6_2_context_length_fixed_w(*args, **kwargs):
+    print(
+        "Warning: experiment_6_2_context_length_fixed_w() is deprecated; "
+        "use run_fixed_weight_context_length_sweep() instead."
+    )
+    return run_fixed_weight_context_length_sweep(*args, **kwargs)
+
+
+def experiment_6_3_task_similarity(*args, **kwargs):
+    print(
+        "Warning: experiment_6_3_task_similarity() is deprecated; "
+        "use run_task_similarity_sweep() instead."
+    )
+    return run_task_similarity_sweep(*args, **kwargs)
+
+
+def experiment_6_4_task_order(*args, **kwargs):
+    print(
+        "Warning: experiment_6_4_task_order() is deprecated; "
+        "use run_task_order_analysis() instead."
+    )
+    return run_task_order_analysis(*args, **kwargs)
+
+
+def experiment_6_5_number_of_tasks(*args, **kwargs):
+    print(
+        "Warning: experiment_6_5_number_of_tasks() is deprecated; "
+        "use run_number_of_tasks_sweep() instead."
+    )
+    return run_number_of_tasks_sweep(*args, **kwargs)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Run multi-task continual learning experiments")
     parser.add_argument("--model_path", type=str, required=True,
                        help="Path to trained model directory")
     parser.add_argument("--experiment", type=str, required=True,
-                       choices=["6.1", "6.2", "6.2fw", "6.3", "6.4", "6.5", "all"],
-                       help="Which experiment to run (6.2fw = 6.2 with fixed w, aligned to Thm 4.3)")
+                       choices=EXPERIMENT_CHOICES,
+                       help=(
+                           "Which experiment to run: training-sample-size, context-length, "
+                           "fixed-weight-context-length, task-similarity, task-order, "
+                           "num-tasks, or all. Deprecated aliases 6.1, 6.2, 6.2fw, "
+                           "6.3, 6.4, and 6.5 are still accepted."
+                       ))
     parser.add_argument("--fixed_w_seed", type=int, default=42,
-                       help="Only for 6.2fw: RNG seed for task weights w_1..w_T")
+                       help="Only for fixed-weight-context-length: RNG seed for task weights w_1..w_T")
     parser.add_argument(
         "--w_scale",
         type=float,
         default=1.0,
-        help="Only for 6.2fw: noise std per dim: w = mu_t + w_scale * N(0,1) (default 1)",
+        help="Only for fixed-weight-context-length: noise std per dim: w = mu_t + w_scale * N(0,1) (default 1)",
     )
     parser.add_argument(
         "--w_task_means",
         type=str,
         default=None,
-        help='Only for 6.2fw: comma-separated mean per task on each coordinate, e.g. "1,2,3,4,5"',
+        help='Only for fixed-weight-context-length: comma-separated mean per task on each coordinate, e.g. "1,2,3,4,5"',
     )
     parser.add_argument("--output_dir", type=str, default="./results",
                        help="Output directory for results")
@@ -1185,9 +1270,10 @@ def main():
                        help="Batch size for evaluation")
     
     args = parser.parse_args()
+    experiment = _canonical_experiment_name(args.experiment)
     
-    if args.experiment == "6.1" or args.experiment == "all":
-        experiment_6_1_training_sample_size(
+    if experiment == "training-sample-size" or experiment == "all":
+        run_training_sample_size_sweep(
             model_path=args.model_path,
             n_dims=args.n_dims,
             output_dir=args.output_dir,
@@ -1196,8 +1282,8 @@ def main():
             batch_size=args.batch_size,
         )
     
-    if args.experiment == "6.2" or args.experiment == "all":
-        experiment_6_2_context_length(
+    if experiment == "context-length" or experiment == "all":
+        run_context_length_sweep(
             model_path=args.model_path,
             n_dims=args.n_dims,
             output_dir=args.output_dir,
@@ -1206,11 +1292,11 @@ def main():
             batch_size=args.batch_size,
         )
 
-    if args.experiment == "6.2fw":
+    if experiment == "fixed-weight-context-length":
         w_task_means = None
         if args.w_task_means is not None:
             w_task_means = [float(x.strip()) for x in args.w_task_means.split(",")]
-        experiment_6_2_context_length_fixed_w(
+        run_fixed_weight_context_length_sweep(
             model_path=args.model_path,
             n_dims=args.n_dims,
             output_dir=args.output_dir,
@@ -1222,8 +1308,8 @@ def main():
             w_task_means=w_task_means,
         )
     
-    if args.experiment == "6.3" or args.experiment == "all":
-        experiment_6_3_task_similarity(
+    if experiment == "task-similarity" or experiment == "all":
+        run_task_similarity_sweep(
             model_path=args.model_path,
             n_dims=args.n_dims,
             output_dir=args.output_dir,
@@ -1232,8 +1318,8 @@ def main():
             batch_size=args.batch_size,
         )
     
-    if args.experiment == "6.4" or args.experiment == "all":
-        experiment_6_4_task_order(
+    if experiment == "task-order" or experiment == "all":
+        run_task_order_analysis(
             model_path=args.model_path,
             n_dims=args.n_dims,
             output_dir=args.output_dir,
@@ -1242,8 +1328,8 @@ def main():
             batch_size=args.batch_size,
         )
     
-    if args.experiment == "6.5" or args.experiment == "all":
-        experiment_6_5_number_of_tasks(
+    if experiment == "num-tasks" or experiment == "all":
+        run_number_of_tasks_sweep(
             model_path=args.model_path,
             n_dims=args.n_dims,
             output_dir=args.output_dir,
