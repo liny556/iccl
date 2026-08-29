@@ -171,14 +171,12 @@ The script evaluates:
 Please consider citing our paper if you find this repo useful in your work 😀.
 
 ```text
-@misc{li2026understandinggeneralizationforgettingincontext,
-      title={Understanding Generalization and Forgetting in In-Context Continual Learning}, 
-      author={Guangyu Li and Meng Ding and Lijie Hu},
-      year={2026},
-      eprint={2605.28705},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2605.28705}, 
+@inproceedings{li2026understanding,
+title={Understanding Generalization and Forgetting in In-Context Continual Learning},
+author={Guangyu Li and Meng Ding and Lijie Hu},
+booktitle={Forty-third International Conference on Machine Learning},
+year={2026},
+url={https://openreview.net/forum?id=68AMoK2YNk}
 }
 ```
 
